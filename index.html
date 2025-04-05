@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neurology Discussion (6)</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+            color: #333;
+            user-select: none; /* يمنع تحديد النص */
+            -webkit-user-select: none; /* لمتصفحات WebKit مثل Chrome وSafari */
+            -moz-user-select: none; /* لمتصفح Firefox */
+            -ms-user-select: none; /* لمتصفح Internet Explorer/Edge */
+        }
+        @media print { /* إخفاء الصفحة عند الطباعة */
+            body { 
+                display: none;
+            }
+        }
+
+        .quiz-container {
+            width: 90%;
+            margin: 20px auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #007BFF;
+        }
+        .timer {
+            color: red;
+            font-size: 18px;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        .question {
+            margin-bottom: 20px;
+        }
+        .question p {
+            font-weight: bold;
+        }
+        .options label {
+            display: block;
+            margin: 5px 0;
+        }
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .btn:hover {
+            background-color: #0056b3;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+            border-radius: 5px;
+            display: none;
+        }
+        .incorrect {
+            color: red;
+        }
+        .correct {
+            color: green;
+        }
+        .question-result {
+            margin-top: 10px;
+            font-size: 14px;
+        }
+        img {
+            pointer-events: none; /* يمنع سحب الصور */
+        }
+    </style>
+</head>
+<body>
+    <div class="quiz-container">
+        <h1>Neurology Discussion (6)</h1>
+        <div class="timer" id="timer">Time remaining: 60 seconds</div>
+
+        <div class="question" id="question-1">
+            <p>1- A 29-year-old female presents complaining of weakness in her arms, leading to increasing difficulties at work. On examination she has a bilateral ptosis and loss of the red-reflex in both eyes. Urine testing also reveals glycosuria. What is the most likely diagnosis?</p>
+            <div class="options">
+                <label><input type="radio" name="q1" value="Myotonic dystrophy"> Myotonic dystrophy</label>
+                <label><input type="radio" name="q1" value="Homocystinuria"> Homocystinuria</label>
+                <label><input type="radio" name="q1" value="Multiple sclerosis"> Multiple sclerosis</label>
+                <label><input type="radio" name="q1" value="Myasthenia gravis"> Myasthenia gravis</label>
+                <label><input type="radio" name="q1" value="HIV"> HIV</label>
+            </div>
+        </div>
+        
+        <div class="question" id="question-2">
+            <p>2- A 27-year-old female presents complaining of generalised weakness. Examination of her face reveals bilateral ptosis, dysarthric speech and a slow-relaxing grip. What is the most likely diagnosis?</p>
+            <div class="options">
+                <label><input type="radio" name="q2" value="Myotonic dystrophy"> Myotonic dystrophy</label>
+                <label><input type="radio" name="q2" value="Myasthenia gravis"> Myasthenia gravis</label>
+                <label><input type="radio" name="q2" value="Multiple sclerosis"> Multiple sclerosis</label>
+                <label><input type="radio" name="q2" value="Ataxic telangiectasia"> Ataxic telangiectasia</label>
+                <label><input type="radio" name="q2" value="Friedreich's ataxia"> Friedreich's ataxia</label>
+            </div>
+        </div>
+        
+        <div class="question" id="question-3">
+            <p>3- Each of the following features are seen in myotonic dystrophy, except:</p>
+            <div class="options">
+                <label><input type="radio" name="q3" value="Mild mental impairment"> Mild mental impairment</label>
+                <label><input type="radio" name="q3" value="Round face"> Round face</label>
+                <label><input type="radio" name="q3" value="Frontal balding"> Frontal balding</label>
+                <label><input type="radio" name="q3" value="Myotonia"> Myotonia</label>
+                <label><input type="radio" name="q3" value="Cataracts"> Cataracts</label>
+            </div>
+        </div>
+        
+        <div class="question" id="question-4">
+            <p>4- Which one of the following is least associated with myotonic dystrophy?</p>
+            <div class="options">
+                <label><input type="radio" name="q4" value="Dysphagia"> Dysphagia</label>
+                <label><input type="radio" name="q4" value="Aortic regurgitation"> Aortic regurgitation</label>
+                <label><input type="radio" name="q4" value="Diabetes mellitus"> Diabetes mellitus</label>
+                <label><input type="radio" name="q4" value="Testicular atrophy"> Testicular atrophy</label>
+                <label><input type="radio" name="q4" value="Learning difficulties"> Learning difficulties</label>
+            </div>
+        </div>
+        
+        <div class="question" id="question-5">
+            <p>5- Ptosis with dilated pupils is observed in:</p>
+            <div class="options">
+                <label><input type="radio" name="q5" value="Homer's Syndrome"> Homer's Syndrome</label>
+                <label><input type="radio" name="q5" value="Myasthenia Gravis"> Myasthenia Gravis</label>
+                <label><input type="radio" name="q5" value="Oculomotor Palsy"> Oculomotor Palsy</label>
+                <label><input type="radio" name="q5" value="Botulism"> Botulism</label>
+                <label><input type="radio" name="q5" value="Trochlear Palsy"> Trochlear Palsy</label>
+            </div>
+        </div>
+        
+        <div class="question" id="question-6">
+            <p>6-Which one of the following features is not associated with an oculomotor nerve palsy?</p>
+            <div class="options">
+                <label><input type="radio" name="q6" value="Miosis"> Miosis</label>
+                <label><input type="radio" name="q6" value="Ptosis"> Ptosis</label>
+                <label><input type="radio" name="q6" value="Eye is deviated 'down and out'"> Eye is deviated 'down and out'</label>
+                <label><input type="radio" name="q6" value="Pain if due to a posterior communicating artery aneurysm"> Pain if due to a posterior communicating artery aneurysm</label>
+                <label><input type="radio" name="q6" value="Diplopia"> Diplopia</label>
+            </div>
+        </div>
+        
+        <div class="question" id="question-7">
+            <p>7-A patient is referred due to the development of a third nerve palsy associated with a headache. On examination meningism is present. Which one of the following diagnoses needs to be urgently excluded?</p>
+            <div class="options">
+                <label><input type="radio" name="q7" value="Weber's syndrome"> Weber's syndrome</label>
+                <label><input type="radio" name="q7" value="Internal carotid artery aneurysm"> Internal carotid artery aneurysm</label>
+                <label><input type="radio" name="q7" value="Multiple sclerosis"> Multiple sclerosis</label>
+                <label><input type="radio" name="q7" value="Posterior communicating artery aneurysm"> Posterior communicating artery aneurysm</label>
+                <label><input type="radio" name="q7" value="Anterior communicating artery aneurysm"> Anterior communicating artery aneurysm</label>
+            </div>
+        </div>
+        
+        <div class="question" id="question-8">
+            <p>8- Horner's syndrome includes all of the following except:</p>
+            <div class="options">
+                <label><input type="radio" name="q8" value="Absent corneal reflex"> Absent corneal reflex</label>
+                <label><input type="radio" name="q8" value="Constricted pupil"> Constricted pupil</label>
+                <label><input type="radio" name="q8" value="Anhidrosis"> Anhidrosis</label>
+                <label><input type="radio" name="q8" value="Enophthalmos"> Enophthalmos</label>
+                <label><input type="radio" name="q8" value="Partial ptosis"> Partial ptosis</label>
+            </div>
+        </div>
+        
+        <div class="question" id="question-9">
+            <p>9- A lesion of the facial nerve in the internal auditory meatus will NOT affect ..</p>
+            <div class="options">
+                <label><input type="radio" name="q9" value="Taste"> Taste</label>
+                <label><input type="radio" name="q9" value="Sweating over the cheek"> Sweating over the cheek</label>
+                <label><input type="radio" name="q9" value="Lacrimation"> Lacrimation</label>
+                <label><input type="radio" name="q9" value="Hearing"> Hearing</label>
+                <label><input type="radio" name="q9" value="Blinking"> Blinking</label>
+            </div>
+        </div>
+        
+        <div class="question" id="question-10">
+            <p>10-A 45-year-old man presents to the Emergency Department following the sudden onset of pain in the right side of his face whilst hammering a nail into the wall. The pain is described as severe and constant. On examination he has a mild right ptosis and small right pupil. What is the most likely diagnosis?</p>
+            <div class="options">
+                <label><input type="radio" name="q10" value="Trigeminal neuralgia"> Trigeminal neuralgia</label>
+                <label><input type="radio" name="q10" value="Glaucoma"> Glaucoma</label>
+                <label><input type="radio" name="q10" value="Carotid artery dissection"> Carotid artery dissection</label>
+                <label><input type="radio" name="q10" value="Syringomyelia"> Syringomyelia</label>
+                <label><input type="radio" name="q10" value="Migraine"> Migraine</label>
+            </div>
+        </div>
+
+        <div class="question" id="question-11">
+            <p>11-Which one of the following causes of Homer's syndrome is due to a lesion in the post-ganglionic part of the nerve supply?</p>
+            <div class="options">
+                <label><input type="radio" name="q11" value="internal carotid aneurysm"> internal carotid aneurysm</label>
+                <label><input type="radio" name="q11" value="Stroke"> Stroke</label>
+                <label><input type="radio" name="q11" value="Syringomyelia"> Syringomyelia</label>
+                <label><input type="radio" name="q11" value="Pancoast's tumour"> Pancoast's tumour</label>
+                <label><input type="radio" name="q11" value="Thyroidectomy"> Thyroidectomy</label>
+            </div>
+        </div>
+        
+        <div class="question" id="question-12">
+            <p>12- Unilateral ptosis is characteristic of all except:</p>
+            <div class="options">
+                <label><input type="radio" name="q12" value="Cavernous sinus thrombosis"> Cavernous sinus thrombosis</label>
+                <label><input type="radio" name="q12" value="Cluster headache"> Cluster headache</label>
+                <label><input type="radio" name="q12" value="Bell's palsy"> Bell's palsy</label>
+                <label><input type="radio" name="q12" value="Syringobulbia"> Syringobulbia</label>
+                <label><input type="radio" name="q12" value="Homer's syndrome"> Homer's syndrome</label>
+            </div>
+        </div>
+        
+        <div class="question" id="question-13">
+            <p>13-Which one of the following is least associated with ptosis?</p>
+            <div class="options">
+                <label><input type="radio" name="q13" value="Homer's syndrome"> Homer's syndrome</label>
+                <label><input type="radio" name="q13" value="Myotonic dystrophy"> Myotonic dystrophy</label>
+                <label><input type="radio" name="q13" value="Lambert-Eaton syndrome"> Lambert-Eaton syndrome</label>
+                <label><input type="radio" name="q13" value="Third nerve palsy"> Third nerve palsy</label>
+                <label><input type="radio" name="q13" value="Motor neuron disease"> Motor neuron disease</label>
+            </div>
+        </div>
+        
+        <div class="question" id="question-14">
+            <p>14-Which one of the following is not a recognised causes of miosis?</p>
+            <div class="options">
+                <label><input type="radio" name="q14" value="Old age"> Old age</label>
+                <label><input type="radio" name="q14" value="Pontine haemorrhage"> Pontine haemorrhage</label>
+                <label><input type="radio" name="q14" value="Holmes-Adie pupil"> Holmes-Adie pupil</label>
+                <label><input type="radio" name="q14" value="Argyll-Robertson pupil"> Argyll-Robertson pupil</label>
+                <label><input type="radio" name="q14" value="Horner's syndrome"> Horner's syndrome</label>
+            </div>
+        </div>
+        
+        <div class="question" id="question-15">
+            <p>15-A 65-year-old woman presents due to a worsening 'numbness' of her lower legs. This has got gradually worse over the past 3 months and is described as 'like walking on cotton wool'. Her past medical history includes hypertension, rheumatoid arthritis, depression and recurrent urinary tract infections. To treat these conditions she is currently taking citalopram, ramipril, amlodipine, atorvastatin, methotrexate and nitrofurantoin. On examination she has evidence of a bilateral loss of sensation to fine touch up to her knees. Which one of the medications is most likely to be responsible?</p>
+            <div class="options">
+                <label><input type="radio" name="q15" value="Methotrexate"> Methotrexate</label>
+                <label><input type="radio" name="q15" value="Nitrofurantoin"> Nitrofurantoin</label>
+                <label><input type="radio" name="q15" value="Ramipril"> Ramipril</label>
+                <label><input type="radio" name="q15" value="Amlodipine"> Amlodipine</label>
+                <label><input type="radio" name="q15" value="Citalopram"> Citalopram</label>
+            </div>
+        </div>
+        
+        <div class="question" id="question-16">
+            <p>16-Which of the following drugs is least likely to cause peripheral neuropathy?</p>
+            <div class="options">
+                <label><input type="radio" name="q16" value="Amiodarone"> Amiodarone</label>
+                <label><input type="radio" name="q16" value="Vincristine"> Vincristine</label>
+                <label><input type="radio" name="q16" value="Trimethoprim"> Trimethoprim</label>
+                <label><input type="radio" name="q16" value="Isoniazid"> Isoniazid</label>
+                <label><input type="radio" name="q16" value="Nitrofurantoin"> Nitrofurantoin</label>
+            </div>
+        </div>
+        
+        <div class="question" id="question-17">
+            <p>17- A 57-year-old immigrant from Vietnam is evaluated by his primary care giver for tingling that have been present in his hands and feet for the past several weeks. He also reports some difficulty walking. His past medical history is notable for hypertriglyceridemia, tobacco abuse, and a recently discovered positive purifed protein derivative (PPD) with sputum that is smear-negative for Mycobacterium tuberculosis. His medications include niacin, aspirin, and isoniazid. Which of the following is likely to reverse his symptoms?</p>
+            <div class="options">
+                <label><input type="radio" name="q17" value="Cobalamin"> Cobalamin</label>
+                <label><input type="radio" name="q17" value="Levothyroxine"> Levothyroxine</label>
+                <label><input type="radio" name="q17" value="Neurontin"> Neurontin</label>
+                <label><input type="radio" name="q17" value="Pregabalin"> Pregabalin</label>
+                <label><input type="radio" name="q17" value="Pyridoxine"> Pyridoxine</label>
+            </div>
+        </div>
+        
+        <div class="question" id="question-18">
+            <p>18-Each of the following are causes of peripheral neuropathy. Which one is associated with predominantly sensory loss?</p>
+            <div class="options">
+                <label><input type="radio" name="q18" value="Diphtheria"> Diphtheria</label>
+                <label><input type="radio" name="q18" value="Hereditary sensorimotor neuropathies"> Hereditary sensorimotor neuropathies</label>
+                <label><input type="radio" name="q18" value="Porphyria"> Porphyria</label>
+                <label><input type="radio" name="q18" value="Lead poisoning"> Lead poisoning</label>
+                <label><input type="radio" name="q18" value="Uraemia"> Uraemia</label>
+            </div>
+        </div>
+        
+        <div class="question" id="question-19">
+            <p>19- Charcot (neuropathic) joint is a recognized complication of all except:</p>
+            <div class="options">
+                <label><input type="radio" name="q19" value="Diabetes mellitus"> Diabetes mellitus</label>
+                <label><input type="radio" name="q19" value="Tabes dorsalis"> Tabes dorsalis</label>
+                <label><input type="radio" name="q19" value="Syringomyelia"> Syringomyelia</label>
+                <label><input type="radio" name="q19" value="Friedreich's ataxia"> Friedreich's ataxia</label>
+                <label><input type="radio" name="q19" value="Leprosy"> Leprosy</label>
+            </div>
+        </div>
+        
+        <div class="question" id="question-20">
+            <p>20-Which one of the following is least recognised as a cause of autonomic neuropathy ?</p>
+            <div class="options">
+                <label><input type="radio" name="q20" value="Guillain-Barre syndrome"> Guillain-Barre syndrome</label>
+                <label><input type="radio" name="q20" value="New variant CJD"> New variant CJD</label>
+                <label><input type="radio" name="q20" value="Diabetes"> Diabetes</label>
+                <label><input type="radio" name="q20" value="ParKinson's"> ParKinson's</label>
+                <label><input type="radio" name="q20" value="HIV"> HIV</label>
+            </div>
+        </div>
+
+        <div class="question" id="question-21">
+            <p>21-Which one of the following causes of peripheral neuropathy is most associated with demyelination?</p>
+            <div class="options">
+                <label><input type="radio" name="q21" value="Vasculitis"> Vasculitis</label>
+                <label><input type="radio" name="q21" value="Alcohol"> Alcohol</label>
+                <label><input type="radio" name="q21" value="Hereditary sensorimotor neuropathies (HSMN) type 1"> Hereditary sensorimotor neuropathies (HSMN) type 1</label>
+                <label><input type="radio" name="q21" value="Vitamin B12 deficiency"> Vitamin B12 deficiency</label>
+                <label><input type="radio" name="q21" value="Diabetes mellitus"> Diabetes mellitus</label>
+            </div>
+        </div>
+        
+        <div class="question" id="question-22">
+            <p>22-A 24-year-old woman with Charcot-Marie-Tooth disease (type 1) asks how likely it is that any future children will have the disease. What is the most accurate answer?</p>
+            <div class="options">
+                <label><input type="radio" name="q22" value="Three times as likely as background population"> Three times as likely as background population</label>
+                <label><input type="radio" name="q22" value="25%"> 25%</label>
+                <label><input type="radio" name="q22" value="Between 5 - 10%"> Between 5 - 10%</label>
+                <label><input type="radio" name="q22" value="Same as background population"> Same as background population</label>
+                <label><input type="radio" name="q22" value="50%"> 50%</label>
+            </div>
+        </div>
+        
+        <div class="question" id="question-23">
+            <p>23-A 47-year-old man with a known history of schizophrenia is admitted to the Emergency Department due to confusion. A bottle of procyclidine tablets are found in his pocket. On examination the temperature is 38.1°C with a blood pressure of 155/100 mmHg. Neurological examination reveals a GCS of 13/15 but assessment of his peripheral nervous system is difficult due to generalised increased muscle tone. What is the most likely diagnosis?</p>
+            <div class="options">
+                <label><input type="radio" name="q23" value="Neuroleptic malignant syndrome"> Neuroleptic malignant syndrome</label>
+                <label><input type="radio" name="q23" value="Procyclidine overdose"> Procyclidine overdose</label>
+                <label><input type="radio" name="q23" value="Catatonic schizophrenia"> Catatonic schizophrenia</label>
+                <label><input type="radio" name="q23" value="Clozapine induced agranulocytosis"> Clozapine induced agranulocytosis</label>
+                <label><input type="radio" name="q23" value="Quetiapine induced rhabdomyolysis"> Quetiapine induced rhabdomyolysis</label>
+            </div>
+        </div>
+        
+        <div class="question" id="question-24">
+            <p>24-A 23-year-old man with a history of schizophrenia is taken to the local Emergency Department as he is generally unwell. He is currently taking olanzapine and citalopram. On examination he is noted to have a temperature of 37.0°C and his blood pressure is 170/100 mmHg. Which other examination finding would best support a diagnosis of neuroleptic malignant syndrome?</p>
+            <div class="options">
+                <label><input type="radio" name="q24" value="Ataxia"> Ataxia</label>
+                <label><input type="radio" name="q24" value="Hyperreflexia"> Hyperreflexia</label>
+                <label><input type="radio" name="q24" value="Muscle rigidity"> Muscle rigidity</label>
+                <label><input type="radio" name="q24" value="Tremor"> Tremor</label>
+                <label><input type="radio" name="q24" value="Papilloedema"> Papilloedema</label>
+            </div>
+        </div>
+        
+        <div class="question" id="question-25">
+            <p>25-Each one of the following is associated with ataxic telangiectasia, except</p>
+            <div class="options">
+                <label><input type="radio" name="q25" value="Telangiectasia"> Telangiectasia</label>
+                <label><input type="radio" name="q25" value="Cerebellar ataxia"> Cerebellar ataxia</label>
+                <label><input type="radio" name="q25" value="Autosomal dominant inheritance"> Autosomal dominant inheritance</label>
+                <label><input type="radio" name="q25" value="Recurrent chest infections"> Recurrent chest infections</label>
+                <label><input type="radio" name="q25" value="Increased risk of malignancy"> Increased risk of malignancy</label>
+            </div>
+        </div>
+        
+        <div class="question" id="question-26">
+            <p>26- Which one of the following is most associated with downbeat nystagmus?</p>
+            <div class="options">
+                <label><input type="radio" name="q26" value="Arnold-Chiari malformation"> Arnold-Chiari malformation</label>
+                <label><input type="radio" name="q26" value="Pseudobulbar palsy"> Pseudobulbar palsy</label>
+                <label><input type="radio" name="q26" value="Jugular foramen syndrome"> Jugular foramen syndrome</label>
+                <label><input type="radio" name="q26" value="Acoustic neuroma"> Acoustic neuroma</label>
+                <label><input type="radio" name="q26" value="Cerebellar vermis lesions"> Cerebellar vermis lesions</label>
+            </div>
+        </div>
+        
+        <div class="question" id="question-27">
+            <p>27- A 54-year-old man presents concerned about leg weakness. On examination he is noted to have increased tone in both legs, brisk reflexes and weakness in both lower limbs. Examination of his upper limbs is normal. Which one of the following is least likely to produce these symptoms?</p>
+            <div class="options">
+                <label><input type="radio" name="q27" value="HIV"> HIV</label>
+                <label><input type="radio" name="q27" value="Amyloidosis"> Amyloidosis</label>
+                <label><input type="radio" name="q27" value="Hereditary spastic paraplegia"> Hereditary spastic paraplegia</label>
+                <label><input type="radio" name="q27" value="Multiple sclerosis"> Multiple sclerosis</label>
+                <label><input type="radio" name="q27" value="Parasagittal meningioma"> Parasagittal meningioma</label>
+            </div>
+        </div>
+        
+        <div class="question" id="question-28">
+            <p>28- Spastic paraplegia is not produced by:</p>
+            <div class="options">
+                <label><input type="radio" name="q28" value="Guillain-Barre syndrome"> Guillain-Barre syndrome</label>
+                <label><input type="radio" name="q28" value="Cord compression"> Cord compression</label>
+                <label><input type="radio" name="q28" value="Ant. spinal artery occlusion"> Ant. spinal artery occlusion</label>
+                <label><input type="radio" name="q28" value="Transverse myelitis"> Transverse myelitis</label>
+            </div>
+        </div>
+        
+        <div class="question" id="question-29">
+            <p>29- Regarding acute transverse myelitis which is false:</p>
+            <div class="options">
+                <label><input type="radio" name="q29" value="Viral or post-vaccinal"> Viral or post-vaccinal</label>
+                <label><input type="radio" name="q29" value="Bladder involvement is very late"> Bladder involvement is very late</label>
+                <label><input type="radio" name="q29" value="Definite upper level of sensory loss"> Definite upper level of sensory loss</label>
+                <label><input type="radio" name="q29" value="Absence of root pain"> Absence of root pain</label>
+                <label><input type="radio" name="q29" value="Flaccid paralysis"> Flaccid paralysis</label>
+            </div>
+        </div>
+        
+        <div class="question" id="question-30">
+            <p>30- A 40-year-old woman who is Known to be HIV positive is admitted to the Emergency Department following a seizure. Her partner reports that she has been having headaches, night sweats and a poor appetite for the past four weeks. Blood tests and a CT head are arranged:</p>
+            <p>CD4 89 u/l</p>
+            <p>CT head  Single ring-enhancing lesion in the right parietal lobe</p>
+            <p>What is the most likely diagnosis?</p>
+            <div class="options">
+                <label><input type="radio" name="q30" value="Primary CNS lymphoma"> Primary CNS lymphoma</label>
+                <label><input type="radio" name="q30" value="Tuberculosis"> Tuberculosis</label>
+                <label><input type="radio" name="q30" value="Progressive multifocal leukoencephalopathy"> Progressive multifocal leukoencephalopathy</label>
+                <label><input type="radio" name="q30" value="Cryptococcus"> Cryptococcus</label>
+                <label><input type="radio" name="q30" value="Toxoplasmosis"> Toxoplasmosis</label>
+            </div>
+        </div>
+
+        <div class="question" id="question-31">
+            <p>31- A 34-year-old man from West Africa is admitted due to confusion associated with left-sided weakness and ataxia. He is known to be HIV positive but is not on antiretroviral treatment. The following results are obtained ..  
+            CD4 43 u/l  
+            CT head shows Low attenuation diffusely. No mass effect or enhancement  
+            What is the most likely diagnosis?</p>
+            <div class="options">
+                <label><input type="radio" name="q31" value="Toxoplasmosis"> Toxoplasmosis</label>
+                <label><input type="radio" name="q31" value="Tuberculosis"> Tuberculosis</label>
+                <label><input type="radio" name="q31" value="Progressive multifocal leukoencephalopathy"> Progressive multifocal leukoencephalopathy</label>
+                <label><input type="radio" name="q31" value="Cryptococcus"> Cryptococcus</label>
+                <label><input type="radio" name="q31" value="Cerebral lymphoma"> Cerebral lymphoma</label>
+            </div>
+        </div>
+        
+        <div class="question" id="question-32">
+            <p>32- Which one of the following is least characteristic of Wernicke's encephalopathy?</p>
+            <div class="options">
+                <label><input type="radio" name="q32" value="Ataxia"> Ataxia</label>
+                <label><input type="radio" name="q32" value="Confusion"> Confusion</label>
+                <label><input type="radio" name="q32" value="Ophthalmoplegia"> Ophthalmoplegia</label>
+                <label><input type="radio" name="q32" value="Confabulation"> Confabulation</label>
+                <label><input type="radio" name="q32" value="Nystagmus"> Nystagmus</label>
+            </div>
+        </div>
+        
+        <div class="question" id="question-33">
+            <p>33- Which of the following will lead to a faster rate of absorption of alcohol from the gut into the blood?</p>
+            <div class="options">
+                <label><input type="radio" name="q33" value="Coadministration with a carbonated beverage"> Coadministration with a carbonated beverage</label>
+                <label><input type="radio" name="q33" value="Concentration of alcohol of more than 20% by volume"> Concentration of alcohol of more than 20% by volume</label>
+                <label><input type="radio" name="q33" value="Concurrent intake of a high-carbohydrate meal"> Concurrent intake of a high-carbohydrate meal</label>
+                <label><input type="radio" name="q33" value="Concurrent intake of a high-fat meal"> Concurrent intake of a high-fat meal</label>
+                <label><input type="radio" name="q33" value="Concurrent intake of a high-protein meal"> Concurrent intake of a high-protein meal</label>
+            </div>
+        </div>
+        
+        <div class="question" id="question-34">
+            <p>34- Which of the following statements best reflects the effect of alcohol on neurotransmitters in the brain?</p>
+            <div class="options">
+                <label><input type="radio" name="q34" value="Decreases dopamine activity"> Decreases dopamine activity</label>
+                <label><input type="radio" name="q34" value="Decreases serotonin activity"> Decreases serotonin activity</label>
+                <label><input type="radio" name="q34" value="Increases γ-aminobutyric acid activity"> Increases γ-aminobutyric acid activity</label>
+                <label><input type="radio" name="q34" value="Stimulates muscarinic acetylcholine receptors"> Stimulates muscarinic acetylcholine receptors</label>
+                <label><input type="radio" name="q34" value="Stimulates N-methyl-D-aspartate excitatory glutamate receptors"> Stimulates N-methyl-D-aspartate excitatory glutamate receptors</label>
+            </div>
+        </div>
+        
+        <div class="question" id="question-35">
+            <p>35- In an individual without any prior history of alcohol intake, what serum concentration of ethanol (in g/dL) would likely result in death?</p>
+            <div class="options">
+                <label><input type="radio" name="q35" value="0.02"> 0.02</label>
+                <label><input type="radio" name="q35" value="0.08"> 0.08</label>
+                <label><input type="radio" name="q35" value="0.28"> 0.28</label>
+                <label><input type="radio" name="q35" value="0.40"> 0.40</label>
+                <label><input type="radio" name="q35" value="0.60"> 0.60</label>
+            </div>
+        </div>
+        
+        <div class="question" id="question-36">
+            <p>36- A 42-year-old man with alcohol dependence is admitted to the hospital for acute pancreatitis. Upon admission, he has an abdominal CT that shows pancreatic edema without necrosis or haemorrhage. He is treated with IV dextrose-containing fluids, multivitamins, thiamine 50 mg daily, pain control, and bowel rest. He typically drinks 24 12-ounce beers daily. Forty-eight hours after admission, you are called because the patient is febrile and combative with the nursing staff. His vital signs demonstrate a heart rate of 132 bpm, blood pressure of 184/96 mmHg, respiratory rate of 32 breaths/min, temperature of 38.7°C, and oxygen saturation of 94% on room air. He is agitated, diaphoretic, and pacing his room. He is oriented to person only. His neurologic examination appears nonfocal, although he does not cooperate. He is tremulous. What is the next step in the management of this patient?</p>
+            <div class="options">
+                <label><input type="radio" name="q36" value="Administration of a bolus of 1 L of normal saline and thiamine 100 mg IV"> Administration of a bolus of 1 L of normal saline and thiamine 100 mg IV</label>
+                <label><input type="radio" name="q36" value="Administration of diazepam 10–20 mg IV followed by bolus doses of 5–10 mg as needed until the patient is calm but arousable"> Administration of diazepam 10–20 mg IV followed by bolus doses of 5–10 mg as needed until the patient is calm but arousable</label>
+                <label><input type="radio" name="q36" value="Perform an emergent head CT"> Perform an emergent head CT</label>
+                <label><input type="radio" name="q36" value="Perform two peripheral blood cultures and begin treatment with imipenem 1 g IV every 8 hours"> Perform two peripheral blood cultures and begin treatment with imipenem 1 g IV every 8 hours</label>
+                <label><input type="radio" name="q36" value="Place the patient in four-point restraints and treat with haloperidol 5 mg IV"> Place the patient in four-point restraints and treat with haloperidol 5 mg IV</label>
+            </div>
+        </div>
+        
+        <div class="question" id="question-37">
+            <p>37- A 23-year-old woman is referred to the neurology clinic after developing a unilateral hand tremor. Over the past 12 months her family report changes in her behaviour and mood associated with some speech problems. On examination a tremor is noted in the right-hand at rest. There also appears to be paucity of movement and some bradykinesia. Dark circular marks are also noted around the iris. The patient reports that her uncle died of liver cirrhosis at the age of 40 years. Given the likely diagnosis, what is the mode of inheritance?</p>
+            <div class="options">
+                <label><input type="radio" name="q37" value="Autosomal dominant"> Autosomal dominant</label>
+                <label><input type="radio" name="q37" value="Mitochondrial"> Mitochondrial</label>
+                <label><input type="radio" name="q37" value="X-linked recessive"> X-linked recessive</label>
+                <label><input type="radio" name="q37" value="Autosomal recessive"> Autosomal recessive</label>
+                <label><input type="radio" name="q37" value="Polygenic"> Polygenic</label>
+            </div>
+        </div>
+        
+        <div class="question" id="question-38">
+            <p>38- Which one of the following is least likely to cause a raised protein level in the cerebrospinal fluid?</p>
+            <div class="options">
+                <label><input type="radio" name="q38" value="Tuberculous meningitis"> Tuberculous meningitis</label>
+                <label><input type="radio" name="q38" value="Guillain-Barre syndrome"> Guillain-Barre syndrome</label>
+                <label><input type="radio" name="q38" value="Fungal meningitis"> Fungal meningitis</label>
+                <label><input type="radio" name="q38" value="Spinal block"> Spinal block</label>
+                <label><input type="radio" name="q38" value="Systemic lupus erythematosus"> Systemic lupus erythematosus</label>
+            </div>
+        </div>
+        
+        <div class="question" id="question-39">
+            <p>39- Which one of the following is least likely to produce lymphocytosis in the cerebrospinal fluid?</p>
+            <div class="options">
+                <label><input type="radio" name="q39" value="Systemic lupus erythematosus"> Systemic lupus erythematosus</label>
+                <label><input type="radio" name="q39" value="Guillain-Barre syndrome"> Guillain-Barre syndrome</label>
+                <label><input type="radio" name="q39" value="Viral encephalitis"> Viral encephalitis</label>
+                <label><input type="radio" name="q39" value="Tuberculosis bacterial meningitis"> Tuberculosis bacterial meningitis</label>
+                <label><input type="radio" name="q39" value="Behcet's syndrome"> Behcet's syndrome</label>
+            </div>
+        </div>
+        
+        <div class="question" id="question-40">
+            <p>40- A 37-year-old woman with a history of type 2 diabetes mellitus and obesity presents after a late period. The urinary hCG test is positive. Her current medication is as follows ..  
+            Orlistat 120mg tds  
+            Simvastatin 40 mg od  
+            Aspirin 75mg od  
+            Metformin 1g bd  
+            Paracetamol 1g qds  
+            Aqueous cream prn  
+            Which other medications must be stopped straight away?</p>
+            <div class="options">
+                <label><input type="radio" name="q40" value="Paracetamol"> Paracetamol</label>
+                <label><input type="radio" name="q40" value="Aspirin"> Aspirin</label>
+                <label><input type="radio" name="q40" value="Simvastatin"> Simvastatin</label>
+                <label><input type="radio" name="q40" value="Orlistat"> Orlistat</label>
+                <label><input type="radio" name="q40" value="Metformin"> Metformin</label>
+            </div>
+        </div>
+
+        <div class="question" id="question-41">
+            <p>41- Which of the following structures have been implicated in the generation of sleep?</p>
+            <div class="options">
+                <label><input type="radio" name="q41" value="Brainstem reticular formation"> Brainstem reticular formation</label>
+                <label><input type="radio" name="q41" value="Midbrain"> Midbrain</label>
+                <label><input type="radio" name="q41" value="Subthalamus"> Subthalamus</label>
+                <label><input type="radio" name="q41" value="Emboliform nucleus"> Emboliform nucleus</label>
+                <label><input type="radio" name="q41" value="Basal forebrain"> Basal forebrain</label>
+            </div>
+        </div>
+        <div class="question" id="question-42">
+            <p>42- Which of the following is the most common sleep disorder in the population?</p>
+            <div class="options">
+                <label><input type="radio" name="q42" value="Delayed sleep phase syndrome"> Delayed sleep phase syndrome</label>
+                <label><input type="radio" name="q42" value="Insomnia"> Insomnia</label>
+                <label><input type="radio" name="q42" value="Obstructive sleep apnea"> Obstructive sleep apnea</label>
+                <label><input type="radio" name="q42" value="Narcolepsy"> Narcolepsy</label>
+                <label><input type="radio" name="q42" value="Restless legs syndrome"> Restless legs syndrome</label>
+            </div>
+        </div>
+        <div class="question" id="question-43">
+            <p>43- Anterior horn cell disease is:</p>
+            <div class="options">
+                <label><input type="radio" name="q43" value="Myasthenia gravis"> Myasthenia gravis</label>
+                <label><input type="radio" name="q43" value="Progressive muscular atrophy"> Progressive muscular atrophy</label>
+                <label><input type="radio" name="q43" value="Tabes dorsalis"> Tabes dorsalis</label>
+                <label><input type="radio" name="q43" value="Botulism"> Botulism</label>
+                <label><input type="radio" name="q43" value="Diphtheria"> Diphtheria</label>
+            </div>
+        </div>
+        <div class="question" id="question-44">
+            <p>44- All of the following may produce syncope except:</p>
+            <div class="options">
+                <label><input type="radio" name="q44" value="Cardiac tamponade"> Cardiac tamponade</label>
+                <label><input type="radio" name="q44" value="Tight aortic stenosis"> Tight aortic stenosis</label>
+                <label><input type="radio" name="q44" value="Stokes-Adams syndrome"> Stokes-Adams syndrome</label>
+                <label><input type="radio" name="q44" value="Arrhythmia"> Arrhythmia</label>
+                <label><input type="radio" name="q44" value="Basilar artery migraine"> Basilar artery migraine</label>
+            </div>
+        </div>
+        <div class="question" id="question-45">
+            <p>45- The following are recognized features of Pancoast's tumour except:</p>
+            <div class="options">
+                <label><input type="radio" name="q45" value="Ipsilateral Homer's syndrome"> Ipsilateral Homer's syndrome</label>
+                <label><input type="radio" name="q45" value="Wasting of the dorsal interossei"> Wasting of the dorsal interossei</label>
+                <label><input type="radio" name="q45" value="pain in the arm radiating to the fourth and fifth fingers"> pain in the arm radiating to the fourth and fifth fingers</label>
+                <label><input type="radio" name="q45" value="Erosion of the first rib"> Erosion of the first rib</label>
+                <label><input type="radio" name="q45" value="Weakness of abduction at the shoulder"> Weakness of abduction at the shoulder</label>
+            </div>
+        </div>
+        <div class="question" id="question-46">
+            <p>46- Which of the following is the best definition of evidence-based medicine?</p>
+            <div class="options">
+                <label><input type="radio" name="q46" value="A summary of existing data from existing clinical trials with a critical methodologic review and statistical analysis of summative data"> A summary of existing data from existing clinical trials with a critical methodologic review and statistical analysis of summative data</label>
+                <label><input type="radio" name="q46" value="A type of research that compares the results of one approach to treating disease with another approach to treating the same disease"> A type of research that compares the results of one approach to treating disease with another approach to treating the same disease</label>
+                <label><input type="radio" name="q46" value="Clinical decision-making support tools developed by professional organisations that include expert opinions and data from clinical trials"> Clinical decision-making support tools developed by professional organisations that include expert opinions and data from clinical trials</label>
+                <label><input type="radio" name="q46" value="Clinical decision making supported by data, preferably randomised controlled clinical trials"> Clinical decision making supported by data, preferably randomised controlled clinical trials</label>
+                <label><input type="radio" name="q46" value="One physician’s clinical experience in caring for multiple patients with a specific disorder over many years"> One physician’s clinical experience in caring for multiple patients with a specific disorder over many years</label>
+            </div>
+        </div>
+        <div class="question" id="question-47">
+            <p>47- Which of the following is the standard measure for determining the impact of a health condition on a population?</p>
+            <div class="options">
+                <label><input type="radio" name="q47" value="Disability-adjusted life-years"> Disability-adjusted life-years</label>
+                <label><input type="radio" name="q47" value="Infant mortality"> Infant mortality</label>
+                <label><input type="radio" name="q47" value="Life expectancy"> Life expectancy</label>
+                <label><input type="radio" name="q47" value="Standardised mortality ratio"> Standardised mortality ratio</label>
+                <label><input type="radio" name="q47" value="Years of life lost"> Years of life lost</label>
+            </div>
+        </div>
+
+        <button class="btn" id="nextBtn" onclick="nextQuestion()">Next Question</button>
+        <button class="btn" id="submitBtn" onclick="evaluateQuiz()" style="display: none;">Submit Quiz</button>
+
+        <div class="result" id="result">
+            <h2>Results</h2>
+            <div id="score"></div>
+            <div id="answers-summary"></div>
+        </div>
+    </div>
+
+    <script>
+        // إضافة حدث للكيبورد لمنع حفظ الصفحة
+        document.addEventListener("keydown", function (event) {
+            if (event.ctrlKey && event.key === "s") {
+                event.preventDefault();
+                alert("تم منع حفظ الصفحة!");
+            }
+        });
+
+        // إضافة حدث للكيبورد لمنع فتح أدوات المطور
+        document.addEventListener("keydown", function (event) {
+            if (event.key === "F12" || (event.ctrlKey && event.shiftKey && event.key === "I")) {
+                event.preventDefault();
+                alert("تم تعطيل أدوات المطور!");
+            }
+        });
+
+        // إضافة حدث للكيبورد لمنع النقر بزر اليمين
+        document.addEventListener('contextmenu', function(event) {
+            event.preventDefault(); // يمنع فتح قائمة السياق
+            alert("النقر بزر الماوس الأيمن غير مسموح به.");
+        });
+
+        let currentQuestion = 1;
+        const totalQuestions = 47;
+        let score = 0;
+        let timerInterval;
+        const answers = {
+            q1: "Myotonic dystrophy",
+            q2: "Myotonic dystrophy",
+            q3: "Round face",
+            q4: "Aortic regurgitation",
+            q5: "Oculomotor Palsy",
+            q6: "Miosis",
+            q7: "Posterior communicating artery aneurysm",
+            q8: "Absent corneal reflex",
+            q9: "sweating over the cheek",
+            q10: "Carotid artery dissection",
+            q11: "internal carotid aneurysm",
+            q12: "Bell's palsy",
+            q13: "Motor neuron disease",
+            q14: "Holmes-Adie pupil",
+            q15: "Nitrofurantoin",
+            q16: "Trimethoprim",
+            q17: "Pyridoxine",
+            q18: "Uraemia",
+            q19: "Friedreich's ataxia",
+            q20: "New variant CJD",
+            q21: "Hereditary sensorimotor neuropathies (HSMN) type 1",
+            q22: "50%",
+            q23: "Neuroleptic malignant syndrome",
+            q24: "Muscle rigidity",
+            q25: "Autosomal dominant inheritance",
+            q26: "Arnold-Chiari malformation",
+            q27: "Amyloidosis",
+            q28: "Guillain-Barre syndrome",
+            q29: "Bladder involvement is very late",
+            q30: "Primary CNS lymphoma",
+            q31: "Progressive multifocal leukoencephalopathy",
+            q32: "Confabulation",
+            q33: "Coadministration with a carbonated beverage",
+            q34: "Increases γ-aminobutyric acid activity",
+            q35: "0.40",
+            q36: "Administration of diazepam 10–20 mg IV followed by bolus doses of 5–10 mg as needed until the patient is calm but arousable",
+            q37: "Autosomal recessive",
+            q38: "Systemic lupus erythematosus",
+            q39: "Guillain-Barre syndrome",
+            q40: "Simvastatin",
+            q41: "Subthalamus",
+            q42: "Insomnia",
+            q43: "Progressive muscular atrophy",
+            q44: "Cardiac tamponade",
+            q45: "Weakness of abduction at the shoulder",
+            q46: "Clinical decision making supported by data, preferably randomised controlled clinical trials",
+            q47: "Disability-adjusted life-years"
+        };
+
+        function showQuestion() {
+            document.querySelectorAll('.question').forEach((q, index) => {
+                q .style.display = index + 1 === currentQuestion ? 'block' : 'none';
+            });
+            document.getElementById('nextBtn').style.display = currentQuestion < totalQuestions ? 'block' : 'none';
+            document.getElementById('submitBtn').style.display = currentQuestion === totalQuestions ? 'block' : 'none';
+        }
+
+        function nextQuestion() {
+            currentQuestion++;
+            clearInterval(timerInterval);
+            startTimer();
+            showQuestion();
+        }
+
+        function startTimer() {
+            let timeRemaining = 60;
+            document.getElementById('timer').textContent = `Time remaining: ${timeRemaining} seconds`;
+            timerInterval = setInterval(() => {
+                timeRemaining--;
+                document.getElementById('timer').textContent = `Time remaining: ${timeRemaining} seconds`;
+                if (timeRemaining <= 0) {
+                    clearInterval(timerInterval);
+                    if (currentQuestion < totalQuestions) {
+                        nextQuestion();
+                    } else {
+                        evaluateQuiz();
+                    }
+                }
+            }, 1000);
+        }
+
+        function evaluateQuiz() {
+            score = 0;
+            let summary = '';
+
+            for (let i = 1; i <= totalQuestions; i++) {
+                const selectedOption = document.querySelector(`input[name="q${i}"]:checked`);
+                const correctAnswer = answers[`q${i}`];
+                const questionElement = document.getElementById(`question-${i}`);
+                const options = document.querySelectorAll(`input[name="q${i}"]`);
+                let questionSummary = `<p><strong>Question ${i}: </strong>${questionElement.querySelector('p').innerText}</p>`;
+
+                options.forEach(option => {
+                    const optionLabel = option.parentElement;
+                    if (option.value === correctAnswer) {
+                        optionLabel.style.color = 'green';
+                    } else if (selectedOption && selectedOption.value === option.value) {
+                        optionLabel.style.color = 'red';
+                    }
+                });
+
+                questionSummary += `<div>Answer: <strong>${selectedOption ? selectedOption.value : 'None selected'}</strong></div>`;
+                questionSummary += `<div>Correct answer: <strong>${correctAnswer}</strong></div>`;
+
+                if (selectedOption && selectedOption.value === correctAnswer) {
+                    score++;
+                    summary += questionSummary + `<p class="correct">Correct</p>`;
+                } else {
+                    summary += questionSummary + `<p class="incorrect">Incorrect</p>`;
+                }
+            }
+
+            document.getElementById('score').textContent = `Your score: ${score} out of ${totalQuestions}`;
+            document.getElementById('answers-summary').innerHTML = summary;
+            document.getElementById('result').style.display = 'block';
+            document.getElementById('timer').style.display = 'none'; 
+            document.querySelectorAll('.question').forEach((q) => q.style.display = 'none');
+
+            clearInterval(timerInterval);
+        }
+
+        window.onload = function() {
+            showQuestion();
+            startTimer();
+        };
+        
+        
+        function nextQuestion() {
+    // Increase the current question counter
+            currentQuestion++;
+
+            // Reset the timer
+            clearInterval(timerInterval); // Stop the current timer
+            startTimer(); // Start the timer from the beginning
+
+            // Show the next question
+            showQuestion();
+        }
+        
+    </script>
+</body>
+</html>
